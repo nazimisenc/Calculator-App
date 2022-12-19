@@ -1,5 +1,6 @@
 const display = document.querySelector(".calculator-input");
 const keys = document.querySelector(".calculator-keys");
+const keydown = document.querySelector("body");
 
 let displayValue ="0";
 let firstValue = null;
@@ -13,7 +14,7 @@ function updateDisplay()
     display.value = displayValue;
 }
 
-keys.addEventListener("click",function(e)
+keys.addEventListener("click",function(e)  //Click events
 {
     const element = e.target;
 
@@ -46,6 +47,59 @@ keys.addEventListener("click",function(e)
     inputNumber(element.value);
     updateDisplay();
     
+}
+);
+
+keydown.addEventListener("keydown",function(e) // Keyboard events : Everyone also can use calculator with keyboard.
+{
+    if (e.key in ["0","1","2","3","4","5","6","7","8","9"])
+    {
+        inputNumber(e.key);
+        updateDisplay();
+        return;
+    }
+    if (e.key === "+")
+    {
+        handleOperator("+");
+        updateDisplay();
+        return;
+    }
+    if (e.key === "-")
+    {
+        handleOperator("-");
+        updateDisplay();
+        return;
+    }
+    if (e.key === "*")
+    {
+        handleOperator("*");
+        updateDisplay();
+        return;
+    }
+    if (e.key === "/")
+    {
+        handleOperator("/");
+        updateDisplay();
+        return;
+    }
+    if (e.keyCode === 13)
+    {
+        handleOperator("=");
+        updateDisplay();
+        return;
+    }
+    if (e.keyCode === 190)
+    {
+        inputDecimal(".");
+        updateDisplay();
+        return;
+    }
+    if (e.keyCode === 8)
+    {
+        clear();
+        updateDisplay();
+        return;
+    }
 }
 );
 
